@@ -1,0 +1,45 @@
+{
+  "executionRoleArn": "arn:aws:iam::<<account>>:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/mysql-export",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "environment": [
+        {
+          "name": "dbhost",
+          "value": ""
+        },
+        {
+          "name": "dbname",
+          "value": ""
+        },
+        {
+          "name": "dbpassword",
+          "value": ""
+        },
+        {
+          "name": "dbusername",
+          "value": ""
+        }
+      ],
+      "memoryReservation": 512,
+      "image": "sathyabhat/rds-export-to-s3:1 .",
+      "name": "mysql-export"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "512",
+  "cpu": "256",
+  "taskRoleArn": "arn:aws:iam::<<account>>:role/allow-mysql-exports-s3",
+  "family": "mysql-export",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ]
+}
